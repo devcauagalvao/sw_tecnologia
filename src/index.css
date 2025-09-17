@@ -49,8 +49,15 @@ body {
 
 /* Animation utilities */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .float-animation {
@@ -65,8 +72,13 @@ body {
 
 /* Loading animation */
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .animate-spin-slow {
@@ -133,4 +145,8 @@ body {
   .no-print {
     display: none !important;
   }
+}
+
+.custom-map {
+  z-index: 0 !important;
 }

@@ -1,5 +1,5 @@
 import React, { useState, createContext } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 import HomePage from './components/pages/HomePage';
@@ -8,7 +8,7 @@ import AuthModal from './components/auth/AuthModal';
 import { AuthContext, useAuthState } from './hooks/useAuth';
 
 function App() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState<'home' | 'map'>('home');
   
@@ -38,35 +38,15 @@ function App() {
         <Sidebar
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
+          onOpen={() => setIsSidebarOpen(true)}
           user={auth.user}
         />
 
         {/* Main Content */}
         <main className="relative">
-          <AnimatePresence mode="wait">
-            {currentPage === 'home' && (
-              <motion.div
-                key="home"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <HomePage />
-              </motion.div>
-            )}
-            {currentPage === 'map' && (
-              <motion.div
-                key="map"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <MapPage />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {/* Removido AnimatePresence e motion.div para transição */}
+          {currentPage === 'home' && <HomePage />}
+          {currentPage === 'map' && <MapPage />}
         </main>
 
         {/* Authentication Modal */}
@@ -76,26 +56,6 @@ function App() {
           onLogin={auth.login}
           onRegister={auth.register}
         />
-
-        {/* Navigation Dots */}
-        <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 space-y-3">
-          <button
-            onClick={() => handlePageChange('home')}
-            className={`w-3 h-3 rounded-full transition-all duration-200 ${
-              currentPage === 'home' 
-                ? 'bg-blue-600 scale-125' 
-                : 'bg-gray-300 hover:bg-gray-400'
-            }`}
-          />
-          <button
-            onClick={() => handlePageChange('map')}
-            className={`w-3 h-3 rounded-full transition-all duration-200 ${
-              currentPage === 'map' 
-                ? 'bg-blue-600 scale-125' 
-                : 'bg-gray-300 hover:bg-gray-400'
-            }`}
-          />
-        </div>
 
         {/* Floating Action Button for Map */}
         {currentPage === 'home' && (
