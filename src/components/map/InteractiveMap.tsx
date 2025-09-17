@@ -1,14 +1,34 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Polygon, useMap } from 'react-leaflet';
 import * as L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { mockCondominiums } from '../../utils/mockData';
-import { Condominium } from '../../types';
+import Modal from './modal'; // Certifique-se que o caminho está correto
+import { Condominium } from '../types';
 
-interface InteractiveMapProps {
-  onRegionClick: (condominium: Condominium) => void;
-}
+const mockCondominiums: Condominium[] = [
+  {
+    id: 'vila-dos-manacas',
+    name: 'Vila dos Manacás',
+    vlan: 192,
+    location: { lat: -23.2571, lng: -47.28304 },
+    description: 'Condomínio residencial tranquilo com infraestrutura moderna.',
+    coverage: '100% Fibra Óptica',
+    status: 'active',
+    equipments: [
+      { id: 'e1', type: 'OLT', model: 'Huawei MA5608T', status: 'operational', installDate: '2023-01-15' },
+      { id: 'e2', type: 'ONT', model: 'Huawei HG8310M', status: 'operational', installDate: '2023-01-20' },
+      { id: 'e3', type: 'Router', model: 'TP-Link AX73', status: 'operational', installDate: '2023-01-25' },
+    ],
+    polygon: [
+      [-23.2568, -47.2833],
+      [-23.2568, -47.2827],
+      [-23.2574, -47.2827],
+      [-23.2574, -47.2833],
+    ],
+  },
+];
 
+// Ajusta o mapa para caber todos os marcadores
 const FitBounds: React.FC<{ positions: L.LatLngExpression[] }> = ({ positions }) => {
   const map = useMap();
   useEffect(() => {
@@ -20,126 +40,123 @@ const FitBounds: React.FC<{ positions: L.LatLngExpression[] }> = ({ positions })
   return null;
 };
 
+// Cria marcador menor e mais clean
 const createDivIcon = (color: string, active = false) => {
-  // small inline SVG approximating the SignalIcon (white)
-  const svg = `
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M2 12C4.5 8.5 8 6 12 6" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M6 16C8 14 10 13 12 13" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M10 20C11 19.2 11.8 18.5 12.6 18" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="12" cy="21" r="1.2" fill="white"/>
-    </svg>
-  `;
-  const ring = active ? 'box-shadow:0 0 0 6px rgba(59,130,246,0.18);' : '';
+  const ring = active ? 'box-shadow: 0 0 0 6px rgba(59,130,246,0.3);' : '';
   const html = `
     <div style="
-      width:64px;height:64px;border-radius:16px;
-      display:flex;align-items:center;justify-content:center;
-      background:${color};${ring}
-      box-shadow:0 8px 18px rgba(15,23,42,0.12);
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      background:${color};
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      ${ring};
+      box-shadow:0 4px 12px rgba(0,0,0,0.15);
+      cursor:pointer;
     ">
-      ${svg}
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 12C4.5 8.5 8 6 12 6" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M6 16C8 14 10 13 12 13" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M10 20C11 19.2 11.8 18.5 12.6 18" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="12" cy="21" r="1" fill="white"/>
+      </svg>
     </div>
   `;
   return L.divIcon({
     html,
     className: 'custom-div-icon',
-    iconSize: [64, 64],
-    iconAnchor: [32, 32],
-    popupAnchor: [0, -36]
+    iconSize: [40, 40],
+    iconAnchor: [20, 20],
   });
 };
 
-const InteractiveMap: React.FC<InteractiveMapProps> = ({ onRegionClick }) => {
-  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
-  const [mapZoom, setMapZoom] = useState<number>(13);
+const statusColor = (status: string) => {
+  switch (status) {
+    case 'active': return '#10B981';
+    case 'maintenance': return '#F59E0B';
+    case 'planned': return '#3B82F6';
+    default: return '#6B7280';
+  }
+};
+
+const InteractiveMap: React.FC = () => {
+  const [selectedRegion, setSelectedRegion] = useState<Condominium | null>(null);
+  const [searchText, setSearchText] = useState('');
   const mapRef = useRef<L.Map | null>(null);
 
-  const positions = useMemo(() => {
-    return mockCondominiums
-      .map((c) => [c.location.lat, c.location.lng] as L.LatLngExpression)
-      .filter(Boolean);
-  }, []);
+  const positions = useMemo(() => mockCondominiums.map(c => [c.location.lat, c.location.lng] as L.LatLngExpression), []);
 
-  const statusColor = (status: string) => {
-    switch (status) {
-      case 'active': return '#10B981';
-      case 'maintenance': return '#F59E0B';
-      case 'planned': return '#3B82F6';
-      default: return '#6B7280';
-    }
-  };
+  const filteredCondos = searchText
+    ? mockCondominiums.filter(c => c.name.toLowerCase().includes(searchText.toLowerCase()))
+    : [];
 
-  const handleMarkerClick = (condo: Condominium) => {
-    setSelectedRegion(condo.id);
-    onRegionClick(condo);
-    // center map on click slightly
-    if (mapRef.current && mapRef.current.setView) {
-      mapRef.current.setView([condo.location.lat, condo.location.lng], Math.max(mapRef.current.getZoom(), 13), { animate: true });
+  const handleSelectCondo = (condo: Condominium) => {
+    setSelectedRegion(condo);
+    if (mapRef.current) {
+      mapRef.current.setView([condo.location.lat, condo.location.lng], 16, { animate: true });
     }
   };
 
   return (
-    <div className="relative w-full h-[600px] rounded-2xl overflow-hidden border border-gray-200 shadow-lg">
-      {/* Mantém os controles e o layout visual original */}
-      <div className="absolute top-4 right-4 z-20 flex flex-col space-y-2">
-        <button
-          onClick={() => {
-            if (mapRef.current) {
-              const z = Math.min(mapRef.current.getZoom() + 1, 19);
-              mapRef.current.setZoom(z);
-              setMapZoom(z);
-            }
-          }}
-          className="w-10 h-10 bg-white rounded-lg shadow-lg flex items-center justify-center text-gray-700 hover:text-blue-600 transition-colors"
-        >
-          +
-        </button>
-        <button
-          onClick={() => {
-            if (mapRef.current) {
-              const z = Math.max(mapRef.current.getZoom() - 1, 2);
-              mapRef.current.setZoom(z);
-              setMapZoom(z);
-            }
-          }}
-          className="w-10 h-10 bg-white rounded-lg shadow-lg flex items-center justify-center text-gray-700 hover:text-blue-600 transition-colors"
-        >
-          -
-        </button>
+    <div className="relative w-full h-[600px] rounded-xl overflow-hidden border border-gray-200 shadow-lg">
+
+      {/* Barra de pesquisa */}
+      <div className="absolute top-4 right-4 z-40 flex flex-col space-y-2">
+        <input
+          type="text"
+          placeholder="Pesquisar condomínio..."
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          className="px-4 py-2 rounded-lg border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+        />
+        {searchText && (
+          <div className="bg-white max-h-60 overflow-y-auto rounded-lg shadow-md mt-1 z-50">
+            {filteredCondos.map(c => (
+              <div
+                key={c.id}
+                onClick={() => { handleSelectCondo(c); setSearchText(''); }}
+                className="px-4 py-2 hover:bg-blue-100 cursor-pointer"
+              >
+                {c.name}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Título */}
-      <div className="absolute top-4 left-4 z-20">
-        <div className="bg-white/90 backdrop-blur-md rounded-xl p-4 shadow-lg">
-          <h3 className="text-lg font-semibold text-gray-900 flex items-center">
-            <svg className="w-5 h-5 mr-2 text-blue-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2C8 2 5 5 5 9c0 6.2 7 13 7 13s7-6.8 7-13c0-4-3-7-7-7z" fill="#3B82F6" />
-              <path d="M12 11.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" fill="#fff" />
-            </svg>
-            Região de Itu, SP
-          </h3>
-          <p className="text-sm text-gray-600">Clique nos marcadores para mais detalhes</p>
-        </div>
-      </div>
-
+      {/* Mapa */}
       <MapContainer
-        center={positions[0] || [-23.2589, -47.2999]}
-        zoom={mapZoom}
-        style={{ height: '100%', width: '100%' }}
+        center={positions[0] || [-23.2571, -47.28304]}
+        zoom={14}
+        scrollWheelZoom
+        style={{ height: '100%', width: '100%', position: 'relative', zIndex: 10 }}
         ref={mapRef}
-        scrollWheelZoom={true}
-        className="leaflet-container custom-map"
+        className="leaflet-container"
       >
-
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+          attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
         <FitBounds positions={positions} />
 
+        {mockCondominiums.map(c => (
+          <Marker
+            key={c.id}
+            position={[c.location.lat, c.location.lng]}
+            icon={createDivIcon(statusColor(c.status), selectedRegion?.id === c.id)}
+            eventHandlers={{ click: () => handleSelectCondo(c) }}
+          />
+        ))}
+
+        {selectedRegion?.polygon && (
+          <Polygon positions={selectedRegion.polygon} pathOptions={{ color: '#3B82F6', weight: 2, fillOpacity: 0.15 }} />
+        )}
       </MapContainer>
+
+      {/* Modal */}
+      <Modal condo={selectedRegion} onClose={() => setSelectedRegion(null)} />
     </div>
   );
 };
