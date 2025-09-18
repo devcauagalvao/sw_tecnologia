@@ -14,11 +14,7 @@ const mockCondominiums: Condominium[] = [
     location: { lat: -23.2571, lng: -47.28304 },
     coverage: '100% Fibra Óptica',
     status: 'active',
-    equipments: [
-      { id: 'e1', type: 'OLT', model: 'Huawei MA5608T', status: 'operational', installDate: '2023-01-15' },
-      { id: 'e2', type: 'ONT', model: 'Huawei HG8310M', status: 'operational', installDate: '2023-01-20' },
-      { id: 'e3', type: 'Router', model: 'TP-Link AX73', status: 'operational', installDate: '2023-01-25' },
-    ],
+    equipments: [],
     polygon: [[-23.2568, -47.2833]],
   },
   {
@@ -28,11 +24,7 @@ const mockCondominiums: Condominium[] = [
     location: { lat: -23.411925449433493, lng: -47.35015500804215 },
     coverage: '100% Fibra Óptica',
     status: 'active',
-    equipments: [
-      { id: 'e1', type: 'OLT', model: 'Huawei MA5608T', status: 'operational', installDate: '2023-01-15' },
-      { id: 'e2', type: 'ONT', model: 'Huawei HG8310M', status: 'operational', installDate: '2023-01-20' },
-      { id: 'e3', type: 'Router', model: 'TP-Link AX73', status: 'operational', installDate: '2023-01-25' },
-    ],
+    equipments: [],
     polygon: [[-23.411925449433493, -47.35015500804215]],
   },
   {
@@ -42,11 +34,7 @@ const mockCondominiums: Condominium[] = [
     location: { lat: -23.412629546779417, lng: -47.394181529778194 },
     coverage: '100% Fibra Óptica',
     status: 'active',
-    equipments: [
-      { id: 'e1', type: 'OLT', model: 'Huawei MA5608T', status: 'operational', installDate: '2023-01-15' },
-      { id: 'e2', type: 'ONT', model: 'Huawei HG8310M', status: 'operational', installDate: '2023-01-20' },
-      { id: 'e3', type: 'Router', model: 'TP-Link AX73', status: 'operational', installDate: '2023-01-25' },
-    ],
+    equipments: [],
     polygon: [[-23.412629546779417, -47.394181529778194]],
   },
   {
@@ -56,14 +44,175 @@ const mockCondominiums: Condominium[] = [
     location: { lat: -23.180424656158106, lng: -47.26721388335353 },
     coverage: '100% Fibra Óptica',
     status: 'active',
-    equipments: [
-      { id: 'e1', type: 'OLT', model: 'Huawei MA5608T', status: 'operational', installDate: '2023-01-15' },
-      { id: 'e2', type: 'ONT', model: 'Huawei HG8310M', status: 'operational', installDate: '2023-01-20' },
-      { id: 'e3', type: 'Router', model: 'TP-Link AX73', status: 'operational', installDate: '2023-01-25' },
-    ],
+    equipments: [],
     polygon: [[-23.180424656158106, -47.26721388335353]],
   },
+
+    {
+    id: 'PQAmerica',
+    name: 'PQAmerica',
+    vlan: 221,
+    location: { lat: -23.270368256674534,  lng: -47.2727737975025 },
+    coverage: '100% Fibra Óptica',
+    status: 'active',
+    equipments: [],
+    polygon: [[-23.270368256674534, -47.2727737975025]],
+  },
+
+   {
+    id: 'Torres de Itu',
+    name: 'Torres de Itu',
+    vlan: 189,
+    location: { lat: -23.267456154150906,  lng: -47.28419386265731},
+    coverage: '100% Fibra Óptica',
+    status: 'active',
+    equipments: [],
+    polygon: [[-23.267456154150906, -47.28419386265731]],
+  },
+
+{
+    id: 'Palmeiras Imperiais',
+    name: 'Palmeiras Imperiais',
+    vlan: 189,
+    location: { lat: -23.226915168554,   lng: -47.3222304160444},
+    coverage: '100% Fibra Óptica',
+    status: 'active',
+    equipments: [],
+    polygon: [[  -23.226915168554, -47.3222304160444,]],
+  },
+
+  {
+    id: 'Montis',
+    name: 'Montis',
+    vlan: 192,
+    location: { lat: -23.281586668536182, lng: -47.27683252089721},
+    coverage: '100% Fibra Óptica',
+    status: 'active',
+    equipments: [],
+    polygon: [[  -23.281586668536182, -47.27683252089721]],
+  },
+
+
+    {
+    id: 'Ilha dos Corais',
+    name: 'Ilha dos Corais',
+    vlan: 194,
+    location: { lat: -23.26975710988793, lng: -47.27683252089721},
+    coverage: '100% Fibra Óptica',
+    status: 'active',
+    equipments: [],
+    polygon: [[   -23.26975710988793,  -47.27683252089721]],
+  },
+
+    
+    {
+    id: 'Vilas do Golf',
+    name: 'Vilas do Golf',
+    vlan: 188,
+    location: { lat: -23.312240355084445,  lng: -47.2883669591068},
+    coverage: '100% Fibra Óptica',
+    status: 'active',
+    equipments: [],
+    polygon: [[   -23.312240355084445,  -47.2883669591068]],
+  },
+
+
+   {
+    id: 'Grand Parc',
+    name: 'Grand Parc',
+    vlan: 183,
+    location: { lat: -23.286295520528686,  lng:  -47.280397603702625},
+    coverage: '100% Fibra Óptica',
+    status: 'active',
+    equipments: [],
+    polygon: [[   -23.286295520528686,  -47.280397603702625]],
+  },
+
+   {
+    id: 'Nova Center',
+    name: 'Nova Center',
+    vlan: 50,
+    location: { lat: -23.281707188255716,   lng:  -47.29010300503428},
+    coverage: '100% Fibra Óptica',
+    status: 'active',
+    equipments: [],
+    polygon: [[   -23.281707188255716,  -47.29010300503428,]],
+  },
+
+
+   {
+    id: 'Carolina',
+    name: 'Carolina',
+    vlan: 184,
+    location: { lat: -23.311916912800726,   lng: -47.324252730336084},
+    coverage: '100% Fibra Óptica',
+    status: 'active',
+    equipments: [],
+    polygon: [[   -23.311916912800726, -47.324252730336084]],
+  },
+
+   {
+    id: 'Bretagne',
+    name: 'Bretagne',
+    vlan: 185,
+    location: { lat: -23.24007660474858,   lng:   -47.32483221695294},
+    coverage: '100% Fibra Óptica',
+    status: 'active',
+    equipments: [],
+    polygon: [[   -23.24007660474858,    -47.32483221695294]],
+  },
+
+ {
+    id: 'Terras Leonardi',
+    name: 'Terras Leonardi',
+    vlan: 184,
+    location: { lat: -23.35351560634927,   lng:   -47.30227858784367 },
+    coverage: '100% Fibra Óptica',
+    status: 'active',
+    equipments: [],
+    polygon: [[   -23.35351560634927,  -47.30227858784367 ]],
+  },
+
+{
+    id: 'CDHU',
+    name: 'CDHU',
+    vlan: 181,
+    location: { lat: -23.29523284778951,   lng:   -47.304217413824944 },
+    coverage: '100% Fibra Óptica',
+    status: 'active',
+    equipments: [],
+    polygon: [[   -23.29523284778951,  -47.304217413824944 ]],
+  },
+
+  {
+    id: 'Pinheiro',
+    name: 'Pinheiro',
+    vlan: 180,
+    location: { lat: -23.295125250001878, lng:   -47.277589673323305 },
+    coverage: '100% Fibra Óptica',
+    status: 'active',
+    equipments: [],
+    polygon: [[   -23.295125250001878,  -47.277589673323305 ]],
+  },
+
+
+
+
+
 ];
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ----------------- COMPONENTES AUXILIARES -----------------
 const FitBounds: React.FC<{ positions: L.LatLngExpression[] }> = ({ positions }) => {
@@ -77,40 +226,49 @@ const FitBounds: React.FC<{ positions: L.LatLngExpression[] }> = ({ positions })
   return null;
 };
 
-// Marcador Wi-Fi verde animado
+// Ícone Wi-Fi customizado chamativo
 const createWifiIcon = () => {
   const html = `
     <div style="
-      width:50px;
-      height:50px;
+      width:58px;
+      height:58px;
       border-radius:50%;
       background:#e5e7eb;
+      border:3px solid #32CD32;
       display:flex;
       align-items:center;
       justify-content:center;
+      box-shadow:0 4px 15px rgba(0,0,0,0.25);
       position:relative;
-      box-shadow:0 4px 12px rgba(0,0,0,0.15);
-      cursor:pointer;
-      transition: transform 0.2s;
+      transition: transform 0.2s ease;
     ">
-      <div style="display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:26px;">
-        <span style="width:4px; height:4px; background:#4ade80; border-radius:2px; margin:1px 0; animation:wifiBar 1.2s infinite ease-in-out;"></span>
-        <span style="width:6px; height:6px; background:#4ade80; border-radius:3px; margin:1px 0; animation:wifiBar 1.2s infinite ease-in-out 0.2s;"></span>
-        <span style="width:8px; height:8px; background:#4ade80; border-radius:4px; margin:1px 0; animation:wifiBar 1.2s infinite ease-in-out 0.4s;"></span>
-      </div>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+        <path d="M8.5 16.55a5.5 5.5 0 0 1 7 0"/>
+        <path d="M12 20h.01"/>
+      </svg>
+      <span style="
+        position:absolute;
+        width:100%;
+        height:100%;
+        border-radius:50%;
+        border:2px solid rgba(34,197,94,0.6);
+        animation:pulse 1.6s infinite;
+      "></span>
     </div>
     <style>
-      @keyframes wifiBar {
-        0%, 40%, 100% { transform: scaleY(0.4); }
-        20% { transform: scaleY(1); }
+      @keyframes pulse {
+        0% { transform: scale(1); opacity: 0.8; }
+        70% { transform: scale(1.4); opacity: 0; }
+        100% { transform: scale(1); opacity: 0; }
       }
     </style>
   `;
   return L.divIcon({
     html,
     className: 'custom-wifi-icon',
-    iconSize: [50, 50],
-    iconAnchor: [25, 25],
+    iconSize: [58, 58],
+    iconAnchor: [29, 29],
   });
 };
 
@@ -218,25 +376,49 @@ const InteractiveMap: React.FC = () => {
         )}
       </MapContainer>
 
+
       {/* Modal */}
-      {selectedRegion && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center transition">
-          {Modal ? (
-            <Modal condo={selectedRegion} onClose={() => setSelectedRegion(null)} />
-          ) : (
-            <div className="bg-white rounded-xl p-8 shadow-2xl">
-              <h2 className="text-2xl font-bold mb-4">{selectedRegion.name}</h2>
-              <p>{selectedRegion.description}</p>
-              <button
-                className="mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold"
-                onClick={() => setSelectedRegion(null)}
-              >
-                Fechar
-              </button>
-            </div>
-          )}
-        </div>
-      )}
+   {selectedRegion && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center">
+    {Modal ? (
+      <Modal condo={selectedRegion} onClose={() => setSelectedRegion(null)} />
+    ) : (
+      <div className="relative bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 shadow-2xl max-w-lg w-full mx-4 text-center border border-gray-200">
+        {/* Botão de fechar no canto */}
+        <button
+          onClick={() => setSelectedRegion(null)}
+          className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-red-500 hover:text-white shadow-sm transition duration-200"
+        >
+          ✕
+        </button>
+
+        {/* Título */}
+        <h2 className="text-3xl font-extrabold text-gray-800 mb-4 tracking-tight">
+          {selectedRegion.name}
+        </h2>
+
+        {/* Conteúdo */}
+        <p className="text-gray-600 text-lg leading-relaxed">
+          {selectedRegion.coverage}
+        </p>
+
+        {/* Botão principal */}
+        <button
+          className="mt-8 px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold rounded-2xl shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition duration-200"
+          onClick={() => setSelectedRegion(null)}
+        >
+          Fechar
+        </button>
+      </div>
+    )}
+
+  
+  </div>
+)}
+
+
+
+
     </div>
   );
 };

@@ -21,17 +21,29 @@ const fibraVlans: Vlan[] = [
   { id: 6, name: 'FIBRA-PQAMERICA', ip: 221 },
   
   { id: 7, name: 'FIBRA-TORRESDEITU', ip: 189 },
+
   { id: 8, name: 'FIBRA-PALMEIRAS', ip: 199 },
+
   { id: 9, name: 'FIBRA-MONTIS', ip: 192 },
+
   { id: 10, name: 'FIBRA-ILHADOSCORAIS', ip: 194 },
+
   { id: 11, name: 'FIBRA-GOLF', ip: 188 },
+
   { id: 12, name: 'FIBRA-GRANDPARC', ip: 183 },
+
   { id: 13, name: 'FIBRA-NOVACENTER', ip: 50 },
+
   { id: 14, name: 'FIBRA-CAROLINA', ip: 184 },
+
   { id: 15, name: 'FIBRA-BRETAGNE', ip: 185 },
+
   { id: 16, name: 'FIBRA-TERRASLEONARDI', ip: 184 },
+
   { id: 17, name: 'FIBRA-CDHU', ip: 181 },
+
   { id: 18, name: 'FIBRA-PINHEIRINHO', ip: 180 },
+  
   { id: 19, name: 'FIBRA-CONDSTAMARIA', ip: 180 },
   { id: 20, name: 'FIBRA-COND.ACACIAS', ip: 180 },
   { id: 21, name: 'FIBRA-JDPAULISTA', ip: 179 },
