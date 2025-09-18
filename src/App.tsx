@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 import HomePage from './components/pages/HomePage';
 import MapPage from './components/pages/MapPage';
@@ -27,12 +26,7 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar
-        onMenuToggle={toggleSidebar}
-        onAuthClick={openAuthModal}
-        user={auth.user}
-        onLogout={auth.logout}
-      />
+
 
       <Sidebar
         isOpen={isSidebarOpen}

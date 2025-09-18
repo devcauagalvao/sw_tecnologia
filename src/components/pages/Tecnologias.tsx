@@ -105,33 +105,45 @@ const TecnologiaPage: React.FC = () => {
   };
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">Tecnologias de OLT</h1>
+    <div className="p-8 min-h-screen bg-gradient-to-br from-white via-blue-50 to-gray-100">
+      <h1 className="text-4xl font-extrabold mb-10 text-blue-700 text-center drop-shadow-lg tracking-tight">
+        Tecnologias de OLT
+      </h1>
 
-      <div className="space-y-4 max-w-6xl mx-auto">
+      <div className="space-y-6 max-w-6xl mx-auto">
         {olts.map((olt, idx) => (
-          <div key={idx} className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+          <div
+            key={idx}
+            className="rounded-2xl shadow-xl overflow-hidden border border-gray-200 bg-white transition-all duration-300 hover:shadow-2xl"
+          >
             <button
               onClick={() => toggleOpen(idx)}
-              className={`w-full px-6 py-4 flex justify-between items-center text-left ${
-                olt.type === 'EPON' ? 'bg-blue-50' : 'bg-green-50'
-              } font-semibold text-gray-800 hover:bg-opacity-80 transition-colors`}
+              className={`w-full px-7 py-5 flex justify-between items-center text-left font-semibold text-gray-800 transition-colors duration-200 ${
+                olt.type === 'EPON'
+                  ? 'bg-gradient-to-r from-blue-50 to-white'
+                  : 'bg-gradient-to-r from-green-50 to-white'
+              } hover:bg-blue-100/40`}
+              style={{ fontSize: '1.15rem' }}
             >
-              <div>
-                {olt.name} - {olt.ip} ({olt.type})
+              <div className="flex flex-col md:flex-row md:items-center gap-2">
+                <span className="font-bold text-blue-700">{olt.name}</span>
+                <span className="text-xs text-gray-500 px-2 py-1 rounded bg-gray-100 ml-2">{olt.ip}</span>
+                <span className={`px-2 py-1 rounded-full text-xs font-bold ml-2 ${olt.type === 'EPON' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'}`}>
+                  {olt.type}
+                </span>
               </div>
               {openIndex === idx ? (
-                <ChevronUpIcon className="h-6 w-6 text-gray-500" />
+                <ChevronUpIcon className="h-6 w-6 text-blue-400 transition-transform duration-200" />
               ) : (
-                <ChevronDownIcon className="h-6 w-6 text-gray-500" />
+                <ChevronDownIcon className="h-6 w-6 text-blue-400 transition-transform duration-200" />
               )}
             </button>
 
             {openIndex === idx && (
-              <div className="px-6 py-4 border-t border-gray-200">
+              <div className="px-7 py-5 border-t border-gray-100 bg-gradient-to-r from-white to-blue-50 animate-fade-in">
                 {olt.pons.map((pon, i) => (
-                  <div key={i} className="mb-2">
-                    <span className="font-medium">{pon.name}:</span>{' '}
+                  <div key={i} className="mb-3 flex items-start gap-2">
+                    <span className="font-semibold text-blue-600">{pon.name}:</span>
                     <span className="text-gray-700">{pon.description}</span>
                   </div>
                 ))}
@@ -142,15 +154,27 @@ const TecnologiaPage: React.FC = () => {
       </div>
 
       {/* Resumo */}
-      <div className="mt-12 max-w-4xl mx-auto p-6 bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl shadow-lg">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">🔹 Resumo</h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-2">
-          <li>EPON ↔ EPON ✅</li>
-          <li>GPON ↔ GPON ✅</li>
-          <li>EPON ↔ GPON ❌ (incompatível, exceto se for XPON)</li>
-          <li>XPON ↔ GPON/EPON ✅</li>
+      <div className="mt-14 max-w-4xl mx-auto p-7 bg-gradient-to-r from-indigo-50 via-white to-blue-50 rounded-2xl shadow-xl border border-blue-100">
+        <h2 className="text-2xl font-bold mb-4 text-blue-700 flex items-center gap-2">
+          <span className="text-3xl">🔹</span> Resumo
+        </h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-2 pl-2">
+          <li>EPON ↔ EPON <span className="text-green-600 font-bold">✅</span></li>
+          <li>GPON ↔ GPON <span className="text-green-600 font-bold">✅</span></li>
+          <li>EPON ↔ GPON <span className="text-red-500 font-bold">❌</span> <span className="text-gray-500">(incompatível, exceto se for XPON)</span></li>
+          <li>XPON ↔ GPON/EPON <span className="text-green-600 font-bold">✅</span></li>
         </ul>
       </div>
+
+      <style>{`
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(20px);}
+          to { opacity: 1; transform: translateY(0);}
+        }
+        .animate-fade-in {
+          animation: fade-in 0.4s;
+        }
+      `}</style>
     </div>
   );
 };
