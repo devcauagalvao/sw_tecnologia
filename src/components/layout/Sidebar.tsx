@@ -33,10 +33,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onOpen, user }) => {
   const adminItems =
     user?.role === 'admin'
       ? [
-          { icon: ChartBarIcon, label: 'Dashboard', path: '/dashboard' },
-          { icon: UsersIcon, label: 'Usuários', path: '/users' },
-          { icon: CogIcon, label: 'Configurações', path: '/settings' },
-        ]
+        { icon: ChartBarIcon, label: 'Dashboard', path: '/dashboard' },
+        { icon: UsersIcon, label: 'Usuários', path: '/users' },
+        { icon: CogIcon, label: 'Configurações', path: '/settings' },
+      ]
       : [];
 
   const allItems = [...menuItems, ...adminItems];
@@ -52,15 +52,18 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onOpen, user }) => {
       <motion.div
         initial={{ x: isOpen ? 0 : -40 }}
         animate={{ x: 0 }}
-        className={`fixed top-1/2 transform -translate-y-1/2 z-[110] ${
-          isOpen ? 'left-80' : 'left-0'
-        } transition-all duration-300`}
+        className={`fixed top-1/2 transform -translate-y-1/2 z-[110] ${isOpen ? 'left-80' : 'left-0'
+          } transition-all duration-300`}
       >
         <motion.button
           onClick={handleToggle}
           whileHover={{ scale: 1.1, rotate: 5 }}
           whileTap={{ scale: 0.9 }}
-          className="flex items-center justify-center w-11 h-16 bg-white/70 backdrop-blur-lg border border-gray-200 rounded-r-2xl shadow-lg hover:shadow-2xl transition-all"
+          className="flex items-center justify-center w-11 h-16 rounded-r-2xl shadow-lg hover:shadow-2xl transition-all"
+          style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+          }}
         >
           {isOpen ? (
             <ChevronLeftIcon className="w-6 h-6 text-blue-600" />
@@ -88,36 +91,38 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onOpen, user }) => {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: -320, opacity: 0 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed left-0 top-0 h-full w-80 bg-white/80 backdrop-blur-xl shadow-2xl z-[100] flex flex-col border-r border-gray-200/60"
+              className="fixed left-0 top-0 h-full w-80 shadow-2xl z-[100] flex flex-col"
+              style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)',
+              }}
             >
               {/* Cabeçalho */}
-              <div className="flex items-center justify-between p-6 border-b border-gray-200/50">
-                <div className="flex items-center space-x-3">
-                  <motion.div
-                    className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-400 rounded-2xl flex items-center justify-center shadow-lg"
-                    animate={{ rotate: [0, 6, -6, 0] }}
-                    transition={{ repeat: Infinity, duration: 6 }}
-                  >
-                    <CogIcon className="w-6 h-6 text-white" />
-                  </motion.div>
-                  <div>
-                    <h2 className="font-bold text-gray-900 text-lg tracking-wide">
-                      SWTecnologia
-                    </h2>
-                    <p className="text-xs text-gray-500 font-medium">
-                      Menu Principal
-                    </p>
-                  </div>
-                </div>
+              <div className="flex items-center justify-center p-6 border-b border-white/20">
+                <motion.div
+                  className="flex items-center justify-center bg-gradient-to-br from-blue-600 to-blue-400 rounded-2xl p-4 shadow-lg"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <img
+                    src="/src/assets/img/sw.png"
+                    alt="SW Tecnologia"
+                    className="h-12 w-auto object-contain filter drop-shadow-lg"
+                  />
+                </motion.div>
               </div>
 
               {/* Usuário */}
               {user && (
                 <motion.div
-                  className="p-6 border-b border-gray-200/50 bg-gradient-to-r from-blue-50 to-white"
+                  className="p-6 border-b border-white/20"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4 }}
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.05)',
+                  }}
                 >
                   <div className="flex items-center space-x-3">
                     <motion.div
@@ -129,7 +134,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onOpen, user }) => {
                     </motion.div>
                     <div>
                       <p className="font-semibold text-gray-800">{user.name}</p>
-                      <p className="text-xs text-gray-500">{user.email}</p>
+                      <p className="text-xs text-gray-600">{user.email}</p>
                       <span className="inline-block px-2 py-1 mt-1 text-xs bg-blue-100 text-blue-700 rounded-full capitalize font-medium shadow-sm">
                         {user.role}
                       </span>
@@ -146,11 +151,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onOpen, user }) => {
                     to={item.path}
                     onClick={onClose}
                     className={({ isActive }) =>
-                      `relative flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden
-                      ${
-                        isActive
-                          ? 'bg-gradient-to-r from-blue-600 to-blue-400 text-white shadow-lg'
-                          : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
+                      `relative flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden                        ${isActive
+                        ? 'bg-gradient-to-r from-blue-600 to-blue-400 text-white shadow-lg'
+                        : 'text-gray-800 hover:bg-white/20 hover:text-blue-700'
                       }`
                     }
                   >
@@ -168,21 +171,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onOpen, user }) => {
                       transition={{ type: 'spring', stiffness: 300 }}
                       className="flex items-center z-10"
                     >
-                      <div
-                        className={`p-2 rounded-lg ${
-                          location.pathname === item.path
-                            ? 'bg-white/20'
-                            : 'bg-blue-100 group-hover:bg-blue-200'
-                        }`}
-                      >
-                        <item.icon
-                          className={`w-5 h-5 ${
-                            location.pathname === item.path
-                              ? 'text-white'
-                              : 'text-blue-600'
+                      <item.icon
+                        className={`w-6 h-6 ${location.pathname === item.path
+                            ? 'text-white'
+                            : 'text-blue-500 group-hover:text-blue-600'
                           }`}
-                        />
-                      </div>
+                      />
                     </motion.div>
 
                     {/* Texto */}
@@ -199,11 +193,24 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onOpen, user }) => {
               </nav>
 
               {/* Rodapé */}
-              <div className="p-6 border-t border-gray-200/50 bg-white/60 backdrop-blur-md">
-                <p className="text-center text-xs text-gray-500">
+              <div
+                className="p-6 border-t border-white/20"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.05)',
+                }}
+              >
+                <p className="text-center text-xs text-gray-600">
                   © 2025 GLV Informática Desenvolvimento
                   <br />
-                  <span className="text-xs text-gray-400">Versão 1.0.0</span>
+                  <span className="text-xs text-gray-500">Versão 1.0.0</span>
+                  <br />
+                  <NavLink
+                    to="/suporte"
+                    onClick={onClose}
+                    className="text-xs text-blue-500 hover:text-blue-600 hover:underline transition-colors duration-200"
+                  >
+                    Suporte
+                  </NavLink>
                 </p>
               </div>
             </motion.div>

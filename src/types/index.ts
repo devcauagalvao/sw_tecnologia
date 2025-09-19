@@ -9,12 +9,14 @@ export interface User {
 export interface Condominium {
   id: string;
   name: string;
+  vlan: number;
   location: {
     lat: number;
     lng: number;
   };
   description: string;
   equipments: Equipment[];
+  polygon: [number, number][];
   notices: Notice[];
   coverage: string;
   status: 'active' | 'maintenance' | 'planned';

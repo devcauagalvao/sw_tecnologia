@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Polygon, useMap } from 'react-leaflet'
 import * as L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import Modal from '../map/modal';
-import { Condominium } from '../types';
+import { Condominium } from '../../types';
 
 // ----------------- MOCK DE DADOS -----------------
 const mockCondominiums: Condominium[] = [
@@ -16,6 +16,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[-23.2568, -47.2833]],
+    description: 'Condomínio Vila dos Manacás.',
+    notices: [],
   },
   {
     id: 'portal-dos-sabias',
@@ -26,6 +28,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[-23.411925449433493, -47.35015500804215]],
+    description: 'Condomínio Portal Dos Sabias.',
+    notices: [],
   },
   {
     id: 'campos-2',
@@ -36,6 +40,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[-23.412629546779417, -47.394181529778194]],
+    description: 'Condomínio Campos 2.',
+    notices: [],
   },
   {
     id: 'NairMaria',
@@ -46,6 +52,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[-23.180424656158106, -47.26721388335353]],
+    description: 'Condomínio Nair Maria.',
+    notices: [],
   },
 
     {
@@ -57,6 +65,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[-23.270368256674534, -47.2727737975025]],
+    description: 'Condomínio PQAmerica.',
+    notices: [],
   },
 
    {
@@ -68,6 +78,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[-23.267456154150906, -47.28419386265731]],
+    description: 'Condomínio Torres de Itu.',
+    notices: [],
   },
 
 {
@@ -79,6 +91,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[  -23.226915168554, -47.3222304160444,]],
+    description: 'Condomínio Palmeiras Imperiais.',
+    notices: [],
   },
 
   {
@@ -90,6 +104,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[  -23.281586668536182, -47.27683252089721]],
+    description: 'Condomínio Montis.',
+    notices: [],
   },
 
 
@@ -102,6 +118,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[   -23.26975710988793,  -47.27683252089721]],
+    description: 'Condomínio Ilha dos Corais.',
+    notices: [],
   },
 
     
@@ -114,6 +132,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[   -23.312240355084445,  -47.2883669591068]],
+    description: 'Condomínio Vilas do Golf.',
+    notices: [],
   },
 
 
@@ -126,6 +146,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[   -23.286295520528686,  -47.280397603702625]],
+    description: 'Condomínio Grand Parc.',
+    notices: [],
   },
 
    {
@@ -137,6 +159,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[   -23.281707188255716,  -47.29010300503428,]],
+    description: 'Condomínio Nova Center.',
+    notices: [],
   },
 
 
@@ -149,6 +173,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[   -23.311916912800726, -47.324252730336084]],
+    description: 'Condomínio Carolina.',
+    notices: [],
   },
 
    {
@@ -160,6 +186,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[   -23.24007660474858,    -47.32483221695294]],
+    description: 'Condomínio Bretagne.',
+    notices: [],
   },
 
  {
@@ -171,6 +199,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[   -23.35351560634927,  -47.30227858784367 ]],
+    description: 'Condomínio Terras Leonardi.',
+    notices: [],
   },
 
 {
@@ -182,6 +212,8 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[   -23.29523284778951,  -47.304217413824944 ]],
+    description: 'Condomínio CDHU.',
+    notices: [],
   },
 
   {
@@ -193,26 +225,10 @@ const mockCondominiums: Condominium[] = [
     status: 'active',
     equipments: [],
     polygon: [[   -23.295125250001878,  -47.277589673323305 ]],
+    description: 'Condomínio Pinheiro.',
+    notices: [],
   },
-
-
-
-
-
 ];
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // ----------------- COMPONENTES AUXILIARES -----------------
 const FitBounds: React.FC<{ positions: L.LatLngExpression[] }> = ({ positions }) => {
